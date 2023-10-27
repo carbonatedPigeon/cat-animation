@@ -78,16 +78,12 @@ class ChairCusion extends BoxComponent {
         super();
         //default color is white
         this.itemColor = color(255);
-        this.position = createVector(
-            0,
-            -chairDimensions.boxWidth,
-            (chairDimensions.chairWidth * 0.1 / 2) - chairDimensions.boxWidth
-        );
-        this.dimensions = createVector(
-        chairDimensions.chairWidth - (chairDimensions.chairWidth * 0.1), 
-        chairDimensions.boxWidth, 
-        chairDimensions.chairDepth - (chairDimensions.chairWidth * 0.1)
-        );
+        this.forwardPosition = (chairDimensions.chairWidth * 0.1 / 2) - chairDimensions.boxWidth;
+        this.verticalPosition = -chairDimensions.boxWidth;
+        this.horizontalPosition = 0;
+        this.itemDepth = chairDimensions.chairWidth - (chairDimensions.chairWidth * 0.1);
+        this.itemHeight = chairDimensions.boxWidth;
+        this.itemWidth = chairDimensions.chairDepth - (chairDimensions.chairWidth * 0.1);
     }
 }
 
