@@ -3,9 +3,9 @@ class Chair extends DrawableItem {
         super();
         this.chairDimensions = new ChairDimensions();
         this.components = [
-        new Table(),
-        new ChairBack(this.chairDimensions),
-        new ChairCusion(this.chairDimensions)
+            new Table(),
+            new ChairBack(this.chairDimensions),
+            new ChairCusion(this.chairDimensions)
         ];
     }
 }
