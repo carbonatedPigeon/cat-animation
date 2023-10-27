@@ -1,3 +1,7 @@
+/**
+File used to set up cat object
+*/
+
 const POS_ONE_ANGLE = 40;
 
 class Cat extends DrawableItem {
