@@ -28,7 +28,7 @@ function draw() {
   // // cat();
   rotateY(180);
   pop();
-  let table = new Cup();
-  table.drawItem();
+  let item = new Chair();
+  item.drawItem();
 
 }

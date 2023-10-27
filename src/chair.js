@@ -13,94 +13,87 @@ class Chair extends DrawableItem {
 class ChairBack extends DrawableItem {
     constructor(chairDimensions) {
         super();
-        this.chairDimensions = chairDimensions;
-        //default color is black
+        //color default to black
         this.itemColor = color(0);
-    }
-
-    drawItem() {
+        this.chairDimensions = chairDimensions;
+        //setting up chair back components
+        this.leftBackVerticalBox = new BoxComponent();
+        this.rightBackVerticalBox = new BoxComponent();
+        this.topHorizontalBox = new BoxComponent();
+        this.middleHorizontalBox = new BoxComponent();
+        this.components = [
+            this.leftBackVerticalBox,
+            this.rightBackVerticalBox,
+            this.topHorizontalBox,
+            this.middleHorizontalBox,
+        ];
         this.setUpDimensionsAndPositions();
-        //left vertical box
-        fill(this.itemColor);
-        push();
-        translate(this.leftBackVerticalBoxPosition);
-        box(
-        this.backVerticalBoxDimensions.x, 
-        this.backVerticalBoxDimensions.y, 
-        this.backVerticalBoxDimensions.z
-        );
-        pop();
-        //right vertical box
-        push();
-        translate(this.rightBackVerticalBoxPosition);
-        box(
-        this.backVerticalBoxDimensions.x, 
-        this.backVerticalBoxDimensions.y, 
-        this.backVerticalBoxDimensions.z
-        );
-        pop();
-        //top horizontal box
-        push();
-        translate(this.topHorizontalBoxPosition);
-        box(
-        this.topHorizontalBoxDimensions.x, 
-        this.topHorizontalBoxDimensions.y, 
-        this.topHorizontalBoxDimensions.z
-        );
-        pop();
-        //middle horizontal box
-        push();
-        translate(this.middleHorizontalBoxPosition);
-        box(
-            this.middleHorizontalBoxDimensions.x, 
-            this.middleHorizontalBoxDimensions.y, 
-            this.middleHorizontalBoxDimensions.z
-        );
-        pop();
     }
 
     setUpDimensionsAndPositions() {
         let chairBackDepth = (-this.chairDimensions.chairDepth / 2) + this.chairDimensions.boxWidth;
         let chairBackWidthPosition = (this.chairDimensions.chairWidth / 2) - (this.chairDimensions.boxWidth / 2);
-        let topHorizontalBoxWidth = this.chairDimensions.chairLength + (this.chairDimensions.boxWidth * 2);
-        this.backVerticalBoxDimensions = createVector(
-            this.chairDimensions.boxWidth, 
-            this.chairDimensions.backHeight, 
-            this.chairDimensions.boxDepth
+        
+        //setting dimensions of left/right vertical boxes
+        let verticalBoxDepth = this.chairDimensions.boxWidth;
+        let verticalBoxHeight = this.chairDimensions.backHeight;
+        let verticalBoxWidth = this.chairDimensions.boxDepth
+        this.leftBackVerticalBox.setItemDimensions(
+            verticalBoxDepth, 
+            verticalBoxHeight, 
+            verticalBoxWidth
         );
-        this.leftBackVerticalBoxPosition = createVector(
-            chairBackWidthPosition, 
-            -this.chairDimensions.backHeight / 2, 
-            -chairBackDepth
+        this.rightBackVerticalBox.setItemDimensions(
+            verticalBoxDepth, 
+            verticalBoxHeight, 
+            verticalBoxWidth
         );
-        this.rightBackVerticalBoxPosition = createVector(
-        -chairBackWidthPosition, 
-        -this.chairDimensions.backHeight / 2, 
-        -chairBackDepth
+        //setting positions of left/right vertical boxes
+        let backVerticalBoxForwardPosition = chairBackWidthPosition;
+        let backVerticalBoxVerticalPosition = -this.chairDimensions.backHeight / 2;
+        let leftBackVerticalBoxHorizontalPositon = -chairBackDepth;
+        let rightBackVerticalBoxHorizontalPosition = -leftBackVerticalBoxHorizontalPositon
+        this.leftBackVerticalBox.setItemPosition(
+            backVerticalBoxForwardPosition, 
+            backVerticalBoxVerticalPosition, 
+            leftBackVerticalBoxHorizontalPositon,
         );
-        //dimensions of top horizon box on back of chair
-        this.topHorizontalBoxDimensions = createVector(
-        topHorizontalBoxWidth, //extending past vertical boxes
-        this.chairDimensions.boxWidth,
-        this.chairDimensions.boxDepth
+        this.rightBackVerticalBox.setItemPosition(
+            backVerticalBoxForwardPosition, 
+            backVerticalBoxVerticalPosition, 
+            rightBackVerticalBoxHorizontalPosition,
         );
-        //position of top horizon box on back of chair
-        this.topHorizontalBoxPosition = createVector(
-        0, 
-        -this.chairDimensions.backHeight, 
-        -chairBackDepth
+        //dimensions of top horizontal box on back of chair
+        let horizontalBoxDepth = this.chairDimensions.boxDepth;
+        let topHorizontalBoxWidth = this.chairDimensions.chairLength + this.chairDimensions.boxWidth; //extending past vertical boxes
+        let horizontalBoxHeight = this.chairDimensions.boxWidth
+        this.topHorizontalBox.setItemDimensions(
+            horizontalBoxDepth,
+            horizontalBoxHeight,
+            topHorizontalBoxWidth,
         );
-        //dimensions of middle horizon box on back of chair
-        this.middleHorizontalBoxDimensions = createVector(
-        this.chairDimensions.chairLength - this.chairDimensions.boxWidth,
-        this.chairDimensions.boxWidth,
-        this.chairDimensions.boxDepth
+        //dimensions of middle horizontal box on back of chair
+        let middleHorizontalBoxWidth = this.chairDimensions.chairLength - this.chairDimensions.boxWidth;
+        this.middleHorizontalBox.setItemDimensions(
+            horizontalBoxDepth,
+            horizontalBoxHeight,
+            middleHorizontalBoxWidth,
         );
-        //position of middle horizon box on back of chair
-        this.middleHorizontalBoxPosition = createVector(
-        0,
-        -this.chairDimensions.backHeight / 2,
-        -chairBackDepth
+        //position of top horizontal box on back of chair
+        let horizontalBoxForwardPosition = -chairBackDepth;
+        let topHorizontalBoxVerticalPosition = -this.chairDimensions.backHeight;
+        let horizontalBoxHorizontalPosition = 0;
+        this.topHorizontalBox.setItemPosition(
+            horizontalBoxForwardPosition, 
+            topHorizontalBoxVerticalPosition, 
+            horizontalBoxHorizontalPosition
+        );
+        //position of middle horizontal box on back of chair
+        let middleHorizontalBoxVerticalPosition = -this.chairDimensions.backHeight / 2;
+        this.middleHorizontalBox.setItemPosition(
+            horizontalBoxForwardPosition, 
+            middleHorizontalBoxVerticalPosition, 
+            horizontalBoxHorizontalPosition
         );
     }
 }

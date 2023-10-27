@@ -19,7 +19,6 @@ class DrawableItem {
   }
 }
 
-
 class BoxComponent {
   constructor() {
     this.itemDepth = 0; //x plane
@@ -52,6 +51,24 @@ class BoxComponent {
   setItemColor() {
     fill(this.itemColor);
   }
+
+  setItemDimensions(itemDepth, itemHeight, itemWidth) {
+    //setting itemDepth if arg provided
+    if (itemDepth != undefined) { this.itemDepth = itemDepth; }
+    //setting itemHeight if arg provided
+    if (itemHeight != undefined) { this.itemHeight = itemHeight; }
+    //setting itemWidth if arg provided
+    if (itemWidth != undefined) { this.itemWidth = itemWidth; }
+  }
+
+  setItemPosition(x, y, z) {
+    //setting forwardPosition if arg provided
+    if (x != undefined) { this.forwardPosition = x; }
+    //setting verticalPosition if arg provided
+    if (y != undefined) { this.verticalPosition = y; }
+    //setting horizontalPosition if arg provided
+    if (z != undefined) { this.horizontalPosition = z; }
+  }
 }
 
 
@@ -61,6 +78,11 @@ class SphereComponent {
     this.forwardPosition = 0; //x plane
     this.verticalPosition = 0; //y plane
     this.horizontalPosition = 0; //z plane
+    this.position = createVector(
+      this.forwardPosition, 
+      this.verticalPosition, 
+      this.horizontalPosition
+    );
     this.xRotation = 0;
     this.yRotation = 0;
     this.zRotation = 0;
@@ -84,6 +106,24 @@ class SphereComponent {
   
   setItemColor() {
     fill(this.itemColor);
+  }
+
+  setItemDimensions(itemDepth, itemHeight, itemWidth) {
+    //setting itemDepth if arg provided
+    if (itemDepth != undefined) { this.itemDepth = itemDepth; }
+    //setting itemHeight if arg provided
+    if (itemHeight != undefined) { this.itemHeight = itemHeight; }
+    //setting itemWidth if arg provided
+    if (itemWidth != undefined) { this.itemWidth = itemWidth; }
+  }
+
+  setItemPosition(x, y, z) {
+    //setting forwardPosition if arg provided
+    if (x != undefined) { this.forwardPosition = x; }
+    //setting verticalPosition if arg provided
+    if (y != undefined) { this.verticalPosition = y; }
+    //setting horizontalPosition if arg provided
+    if (z != undefined) { this.horizontalPosition = z; }
   }
 }
 
@@ -119,5 +159,23 @@ class EllipsoidComponent {
   
   setItemColor() {
     fill(this.itemColor);
+  }
+
+  setItemDimensions(itemDepth, itemHeight, itemWidth) {
+    //setting itemDepth if arg provided
+    if (itemDepth != undefined) { this.itemDepth = itemDepth; }
+    //setting itemHeight if arg provided
+    if (itemHeight != undefined) { this.itemHeight = itemHeight; }
+    //setting itemWidth if arg provided
+    if (itemWidth != undefined) { this.itemWidth = itemWidth; }
+  }
+
+  setItemPosition(x, y, z) {
+    //setting forwardPosition if arg provided
+    if (x != undefined) { this.forwardPosition = x; }
+    //setting verticalPosition if arg provided
+    if (y != undefined) { this.verticalPosition = y; }
+    //setting horizontalPosition if arg provided
+    if (z != undefined) { this.horizontalPosition = z; }
   }
 }
