@@ -1,4 +1,4 @@
-class Chair extends DrawableItem {
+class Chair extends ComponentAmalgamation {
     constructor() {
         super();
         this.chairDimensions = new ChairDimensions();
@@ -10,7 +10,7 @@ class Chair extends DrawableItem {
     }
 }
 
-class ChairBack extends DrawableItem {
+class ChairBack extends ComponentAmalgamation {
     constructor(chairDimensions) {
         super();
         //color default to black
