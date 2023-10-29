@@ -19,16 +19,15 @@ function draw() {
 
   angleMode(DEGREES);
 
-  //noStroke();
+  noStroke();
   push();
   // setUpCat();
-  // rotateY(-50);
+  //rotateY(50);
   // rotateZ(15);
   // rotateX(10);
-  // // cat();
-  rotateY(180);
-  pop();
-  let item = new Chair();
+  let item = new Cat();
   item.drawItem();
+  pop();
+  
 
 }

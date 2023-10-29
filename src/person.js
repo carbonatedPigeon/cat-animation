@@ -1,4 +1,4 @@
-class Person extends DrawableItem {
+class Person extends ComponentAmalgamation {
   constructor() {
     super();
     //storing list of components that make up person

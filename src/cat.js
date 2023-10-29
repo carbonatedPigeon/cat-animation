@@ -4,31 +4,31 @@ File used to set up cat object
 
 const POS_ONE_ANGLE = 40;
 
-class Cat extends DrawableItem {
+class Cat extends ComponentAmalgamation {
   constructor() {
     super();
     //setting up cat body parts
     this.head = new CatHead();
     this.body = new CatBody();
-    this.frontLeftLeg = new CatLeg(
+    this.frontLeftLeg = new CatLimbs(
       createVector(10, 270, 200),
       90,
       220
     );
-    this.frontRightLeg = new CatLeg(
+    this.frontRightLeg = new CatLimbs(
       createVector(10, 270, -200),
       -270,
       -40
     );
-    this.backLeftLeg = new CatLeg(
+    this.backLeftLeg = new CatLimbs(
       createVector(260, 270, 200),
       90,
-      220
+      -220
     );
-    this.backRightLeg = new CatLeg(
+    this.backRightLeg = new CatLimbs(
       createVector(260, 270, -200),
       -270,
-      -40
+      40
     );
     this.tail = new CatTail();
     this.components = [
@@ -43,7 +43,7 @@ class Cat extends DrawableItem {
   }
 }
 
-class CatHead extends DrawableItem {
+class CatHead extends ComponentAmalgamation {
   constructor() {
     super();
     this.dimensions = new CatHeadDimensions();
@@ -59,12 +59,21 @@ class CatHead extends DrawableItem {
       this.jaw,
       this.headShape,
     ]
+    this.forwardPosition = -200;
+    this.verticalPosition = 100;
+    this.itemScale = createVector(0.5, 0.5, 0.5);
+    this.zRotation = -40;
   }
+
   drawItem() {
     push();
-    rotateZ(-40);
-    translate(-200, -50, 0);
-    scale(0.5, 0.5, 0.5);
+    translate(
+      this.forwardPosition,
+      this.verticalPosition,
+      this.horizontalPosition
+    );
+    scale(this.itemScale);
+    rotateZ(this.zRotation);
     for (let c in this.components) {
       this.components[c].drawItem();
     }
@@ -76,15 +85,18 @@ class CatHead extends DrawableItem {
   }
 }
 
-class CatEye extends DrawableItem {
+class CatEye extends ComponentAmalgamation {
   constructor() {
     super();
-    this.pupil = new CatPupil();
     this.sclera = new CatEyeSclera();
+    this.pupil = new CatPupil();
     this.components = [
       this.pupil,
       this.sclera
     ];
+    this.forwardPosition = 125;
+    this.verticalPosition = 15;
+    this.horizontalPosition = 80;
   }
 }
 
@@ -92,103 +104,101 @@ class CatEyeSclera extends SphereComponent {
   constructor() {
     super();
     this.size = 50;
-    this.forwardPosition = 120;
-    this.verticalPosition = 20;
-    this.horizontalPosition = 80;
+    //color is red
     this.itemColor = color(255, 50, 50);
   }
 }
 
-class CatPupil extends SphereComponent  {
-  constructor(eyePosition) {
+class CatPupil extends EllipsoidComponent  {
+  constructor() {
     super();
     this.itemDepth = 20;
     this.itemHeight = 30;
     this.itemWidth = 10;
-    this.forwardPosition = 0;
-    this.verticalPosition = -35;
-    this.horizontalPosition = 0;
-    this.zRotation = 90;
+    //position relative to sclera
+    this.forwardPosition = -25;
+    this.verticalPosition = -25
+    this.horizontalPosition = 5;
+    this.zRotation = 50;
+    this.yRotation = 10;
   }
 }
 
 class CatEyebrow extends BoxComponent {
   constructor() {
     super();
-    this.yRotation = 35;
-    this.zRotation = -20;
+    this.yRotation = 20;
+    this.zRotation = -40;
+    this.xRotation = 20;
     this.itemDepth = 20;
-    this.itemHeight = 10;
+    this.itemHeight = 55;
     this.itemWidth = 90;
-    this.fowardPosition = 130;
-    this.verticalPosition = -30;
-    this.horizontalPosition = 78;
+    this.forwardPosition = 150;
+    this.verticalPosition = -20;
+    this.horizontalPosition = 75;
   }
 }
 
-class CatBody {
+class CatBody extends EllipsoidComponent {
   constructor() {
+    super();
     this.itemColor = color(80, 90, 100);
-    this.position = createVector(150, 250, 0);
+    this.forwardPosition = 150;
+    this.verticalPosition = 250;
+    this.horizontalPosition = 0;
     this.itemScale = createVector(0.9, 1, 1);
-    this.dimensions = createVector(300, 175, 250);
-  }
-  drawItem() {
-    fill(this.itemColor);
-    push();
-    translate(this.position);
-    scale(this.itemScale);
-    ellipsoid(this.dimensions.x, this.dimensions.y, this.dimensions.z);
-    pop();
+    this.itemDepth = 300;
+    this.itemHeight = 175;
+    this.itemWidth = 250;
   }
 }
 
-class CatLeg {
+class CatLimbs extends ComponentAmalgamation {
   constructor(position, xRotation, zRotation) {
+    super();
     this.xRotation = xRotation;
     this.zRotation = zRotation;
-    this.position = position;
-    this.spherePosition = createVector(0, -100, 0);
-    this.sphereSize = 27;
-    this.sphereZDetail = 9;
-    this.sphereYDetail = 9;
-    this.dimensions = [27, 200, 9, 1];
-    this.itemColor = color(80, 90, 100);
-  }
-  drawItem() {
-    fill(this.itemColor);
-    push();
-    translate(this.position);
-    rotateX(this.xRotation);
-    rotateZ(this.zRotation);
-    cylinder(this.dimensions[0], this.dimensions[1], this.dimensions[2], this.dimensions[3]);
-    push();
-    translate(this.spherePosition);
-    sphere(this.sphereSize, this.sphereZDetail, this.sphereYDetail);
-    pop();
-    pop();
+    this.forwardPosition = position.x;
+    this.verticalPosition = position.y;
+    this.horizontalPosition = position.z;
+    this.components = [
+      new CatPaw(),
+      new CatLeg(),
+    ];
   }
 }
 
-class CatEar {
+class CatPaw extends SphereComponent {
   constructor() {
+    super();
+    this.size = 27;
+    this.verticalPosition = -100;
+    this.itemColor = color(80, 90, 100);
+  }
+}
+
+class CatLeg extends CylinderComponent {
+  constructor() {
+    super();
+    this.radius = 27;
+    this.itemHeight = 200;
+    this.itemColor = color(80, 90, 100);
+  }
+}
+
+class CatEar extends CustomShapeComponent {
+  constructor() {
+    super();
     this.itemColor = color(50);
     this.itemScale = createVector(1.5, 1.1, 1.2);
-    this.position = createVector(190, -20, -160);
+    this.forwardPosition = 200;
+    this.verticalPosition = -10;
+    this.horizontalPosition = -170;
     this.xRotation = 15;
-  }
-  
-  drawItem() {
-    fill(this.itemColor);
-    push();
-    translate(this.position);
-    scale(this.itemScale);
-    rotateX(this.xRotation);
-    this.ear();
-    pop();
+    this.zRotation = 5;
   }
     
-  ear() {
+  constructComponent() {
     const point = [5, -100, 30];
 
     beginShape();
@@ -241,25 +251,17 @@ class CatEar {
   }
 }
 
-class CatTail {
+class CatTail extends CustomShapeComponent {
   constructor() {
-    this.position = createVector(450, 100, 0);
+    super();
+    this.forwardPosition = 450;
+    this.verticalPosition = 100;
     this.itemScale = createVector(1, 1, 1.6);
     this.zRotation = 210;
     this.yRotation = 180;
   }
   
-  drawItem() {
-    push();
-    translate(this.position);
-    scale(this.itemScale);
-    rotateZ(this.zRotation);
-    rotateY(this.yRotation);
-    this.tail();
-    pop();
-  }
-  
-  tail() {
+  constructComponent() {
     push();
     translate(-13, -100, 0);
     rotateZ(-10);
@@ -462,24 +464,16 @@ class CatHeadDimensions {
   }
 }
 
-class CatJaw {
+class CatJaw extends CustomShapeComponent {
   constructor(catHeadDimensions) {
-    this.position = createVector(0);
+    super();
     this.itemColor = color(50);
     this.dimensions = catHeadDimensions;
   }
   
-  drawItem() {
-    push();
-    translate(this.position);
-    this.jaw();
-    pop();
-  }
-  
-  jaw() {
+  constructComponent() {
     const HEIGHT_OF_NOSE = this.dimensions.heightOfNose;
     const BOTTOM_WIDTH_OF_SNOUT = this.dimensions.bottomWidthOfSnout;
-    fill(this.itemColor);
     //lower jaw
     const v124 =[-20,  HEIGHT_OF_NOSE + 70, BOTTOM_WIDTH_OF_SNOUT - 10];
     const v125 = [-20, HEIGHT_OF_NOSE + 90,  BOTTOM_WIDTH_OF_SNOUT - 10];
@@ -594,23 +588,20 @@ class CatJaw {
   }
 }
 
-class CatHeadShape {
+class CatHeadShape extends CustomShapeComponent {
   constructor(catHeadDimensions) {
+    super();
+    this.itemColor = color(50);
     this.dimensions = catHeadDimensions;
   }
   
-  drawItem() {
-    this.snout();
-    this.skull();
-  }
-  
-  snout() {
+  constructComponent() {
     const BOTTOM_WIDTH_OF_SNOUT = this.dimensions.bottomWidthOfSnout;
     const HEIGHT_OF_NOSE = this.dimensions.heightOfNose;
     const TOP_WIDTH_OF_SNOUT = this.dimensions.topWidthOfSnout;
     const HEIGHT_OF_SNOUT = this.dimensions.heightOfSnout;
     fill(80, 90, 100);
-
+    
     //side of nose
     beginShape();
     //top left, clockwise
@@ -636,7 +627,7 @@ class CatHeadShape {
     vertex(-40, HEIGHT_OF_NOSE + 10, 0);
     vertex(-20, HEIGHT_OF_SNOUT, BOTTOM_WIDTH_OF_SNOUT);
     endShape(CLOSE);
-
+    
     fill(120, 130, 140);
     //top of nose
     //flat area
@@ -654,6 +645,7 @@ class CatHeadShape {
     vertex(120, -20, TOP_WIDTH_OF_SNOUT);
     vertex(120, -20, 0);
     endShape(CLOSE);
+    this.skull();
   }
   
   skull() {

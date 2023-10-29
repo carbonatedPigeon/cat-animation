@@ -1,4 +1,4 @@
-class Table extends DrawableItem {
+class Table extends ComponentAmalgamation {
   constructor() {
     super();
     this.itemColor = color(0);
