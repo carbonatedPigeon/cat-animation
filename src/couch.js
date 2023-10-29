@@ -4,7 +4,7 @@ function preload() {
   couchTexture = loadImage('resource\\upholstryTexture.jpeg')
 }
 
-class DrawableCouchComponent extends BoxComponent {
+class CouchBoxComponent extends BoxComponent {
   constructor() {
     super();
   }
@@ -15,7 +15,7 @@ class DrawableCouchComponent extends BoxComponent {
   }
 }
 
-class Couch extends DrawableItem {
+class Couch extends ComponentAmalgamation {
   constructor() {
     super();
     this.couchDimensions = new CouchDimensions();
@@ -67,7 +67,7 @@ class Couch extends DrawableItem {
 }
 
 
-class CouchBack extends DrawableCouchComponent {
+class CouchBack extends CouchBoxComponent {
   constructor(couchDimensions) {
     super();
     //setting item dimensions
@@ -87,7 +87,7 @@ class CouchBack extends DrawableCouchComponent {
 }
 
 
-class CouchSeatCushion extends DrawableCouchComponent {
+class CouchSeatCushion extends CouchBoxComponent {
   constructor(couchDimensions, horizontalPosition) {
     super();
     this.itemDepth = couchDimensions.cushionDepth; //x plane
@@ -100,7 +100,7 @@ class CouchSeatCushion extends DrawableCouchComponent {
 }
 
 
-class CouchBackCushion extends DrawableCouchComponent {
+class CouchBackCushion extends CouchBoxComponent {
   constructor(couchDimensions, horizontalPosition) {
     super();
     this.itemDepth = couchDimensions.cushionHeight;//x plane
@@ -114,7 +114,7 @@ class CouchBackCushion extends DrawableCouchComponent {
 }
 
 
-class CouchArm extends DrawableCouchComponent {
+class CouchArm extends CouchBoxComponent {
   constructor(couchDimensions, horizontalPosition) {
     super();
     this.itemDepth = couchDimensions.cushionDepth;
@@ -127,7 +127,7 @@ class CouchArm extends DrawableCouchComponent {
 }
 
 
-class CouchBottomSection extends DrawableCouchComponent {
+class CouchBottomSection extends CouchBoxComponent {
   constructor() {
     super();
     this.itemDepth = 100;
