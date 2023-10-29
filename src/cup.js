@@ -1,11 +1,12 @@
-class Cup {
+class Cup extends CustomShapeComponent {
     constructor() {
+        super();
         //cup is red
         this.itemColor = color(255, 50, 50)
         this.itemHeight = 50;
     }
 
-    drawItem() {
+    constructComponent() {
         fill(this.itemColor);
 
         beginShape();
