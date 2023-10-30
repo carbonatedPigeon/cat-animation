@@ -24,75 +24,59 @@ class Person extends ComponentAmalgamation {
   }
 }
 
-class Eyebrows extends ComponentAmalgamation {
+class Head extends ComponentAmalgamation {
   constructor() {
     super();
-    //default eyebrow color == black
-    this.eyebrowColor = (0, 0, 0);
-    this.leftEyebrowAngle = 0;
-    this.rightEyebrowAngle = 0;
-    this.leftEyebrowPosition = createVector(-60, -15, 22);
-    this.rightEyebrowPosition = createVector(-60, -15, -22);
-    this.leftEyebrowSize = createVector(10, 5, 15);
-    this.rightEyebrowSize = createVector(10, 5, 15);
-
-    this.leftEyebrow = new Eyebrow(22, 20, 0);
-    this.rightEyebrow = new Eyebrow(-22, -20, 0);
+    this.eyes = new Eyes();
+    this.eyelashes = new Eyelashes();
+    this.eyebrows = new Eyebrows();
+    this.headShape = new HeadShape();
+    this.hair = new Hair();
     this.components = [
-      this.leftEyebrow,
-      this.rightEyebrow,
+      this.eyes,
+      this.eyebrows,
+      this.eyelashes,
+      this.headShape,
+      this.hair,
+    ]
+  }
+}
+
+class Eyebrows extends YSymmetricCoupledComponents {
+  constructor() {
+    super();
+    this.forwardPosition = -60;
+    this.verticalPosition = -15;
+    this.left = new Eyebrow(22, 20, 0);
+    this.right = new Eyebrow(-22, -20, 0);
+    this.components = [
+      this.left,
+      this.right,
     ];
-  }
-  
-  drawItem() {
-    fill(this.eyebrowColor)
-    //left
-    push();
-    translate(this.leftEyebrowPosition);
-    rotateY(20);
-    rotateZ(this.leftEyebrowAngle);
-    box(this.leftEyebrowSize.x, this.leftEyebrowSize.y, this.leftEyebrowSize.z);
-    pop();
-    //right
-    push();
-    translate(this.rightEyebrowPosition);
-    rotateY(-20);
-    rotateZ(this.rightEyebrowAngle);
-    box(this.rightEyebrowSize.x, this.rightEyebrowSize.y, this.rightEyebrowSize.z);
-    pop();
-  }
-
-  setYRotation(yRotation) {
-    this.leftEyebrow.yRotation = yRotation;
-    this.rightEyebrow.yRotation = -yRotation;
-  }
-
-  setZRotation(zRotation) {
-    this.leftEyebrow.zRotation = zRotation;
-    this.rightEyebrow.zRotation = -zRotation;
-  }
+  }  
 }
 
 class Eyebrow extends BoxComponent {
   constructor(horizontalPosition, yRotation, zRotation) {
     super();
+    this.itemDepth = 10;
+    this.itemHeight = 5;
+    this.itemWidth = 15;
     this.yRotation = yRotation;
     this.zRotation = zRotation;
-    this.forwardPosition = horizontalPosition;
-    this.horizontalPosition = 60;
-    this.forwardPosition = -15;
+    this.horizontalPosition = horizontalPosition;
   }
 }
 
-class Eyes extends ComponentAmalgamation {
+class Eyes extends YSymmetricCoupledComponents {
   constructor() {
     super();
     this.forwardPosition = -60;
-    this.leftEye = new Eye(22);
-    this.rightEye = new Eye(-22);
+    this.left = new Eye(22);
+    this.right = new Eye(-22);
     this.components = [
-      this.leftEye,
-      this.rightEye,
+      this.left,
+      this.right,
     ];
   }
 }
@@ -125,16 +109,16 @@ class Pupil extends SphereComponent {
   }
 }
 
-class Eyelashes extends ComponentAmalgamation {
+class Eyelashes extends YSymmetricCoupledComponents {
   constructor() {
     super();
     this.forwardPosition = -55;
     this.verticalPosition = 5;
-    this.leftEyelash = new Eyelash(25, -90);
-    this.rightEyelash = new Eyelash(-25, 90);
+    this.left = new Eyelash(25, -90);
+    this.right = new Eyelash(-25, 90);
     this.components = [
-      this.leftEyelash,
-      this.rightEyelash,
+      this.left,
+      this.right,
     ];
   }
 }
@@ -154,24 +138,6 @@ class Eyelash extends CustomShapeComponent {
 
   constructComponent() {
     triangle(this.x1, this.y1, this.x2, this.y2, this.x3, this.y3);
-  }
-}
-
-class Head extends ComponentAmalgamation {
-  constructor() {
-    super();
-    this.eyes = new Eyes();
-    this.eyelashes = new Eyelashes();
-    this.eyebrows = new Eyebrows();
-    this.headShape = new HeadShape();
-    this.hair = new Hair();
-    this.components = [
-      this.eyes,
-      this.eyebrows,
-      this.eyelashes,
-      this.headShape,
-      this.hair,
-    ]
   }
 }
 
@@ -203,14 +169,14 @@ class Body extends SphereComponent {
   }
 }
 
-class Arms extends ComponentAmalgamation {
+class Arms extends YSymmetricCoupledComponents {
   constructor() {
     super();
-    this.leftArm = new Arm();
-    this.rightArm = new Arm();
+    this.left = new Arm();
+    this.right = new Arm();
     this.components = [
-      this.leftArm,
-      this.rightArm,
+      this.left,
+      this.right,
     ];
   }
 }
@@ -221,15 +187,16 @@ class Arm extends CylinderComponent {
   }
 }
 
-class Legs extends ComponentAmalgamation {
+class Legs extends YSymmetricCoupledComponents {
   constructor() {
     super();
-    this.legColor = color(255, 255, 225);
-    this.leftLeg = new Leg(75, 50);
-    this.rightLeg = new Leg(-75, -50);
+    this.forwardPosition = -100;
+    this.verticalPosition = 300;
+    this.left = new Leg(75, 50);
+    this.right = new Leg(-75, -50);
     this.components = [
-      this.leftLeg,
-      this.rightLeg,
+      this.left,
+      this.right,
     ]
   }
 }
@@ -241,8 +208,6 @@ class Leg extends CylinderComponent {
     this.radius = 25;
     this.itemHeight = 125;
     this.xRotation = 90;
-    this.forwardPosition = -100;
-    this.verticalPosition = 300;
     this.horizontalPosition = forwardPosition;
     this.zRotation = zRotation;
   }
