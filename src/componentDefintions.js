@@ -11,7 +11,6 @@ class ComponentAmalgamation {
     this.xRotation = 0;
     this.yRotation = 0;
     this.zRotation = 0;
-    this.itemColor = color(0);
   }
   
   drawItem() {
@@ -35,6 +34,51 @@ class ComponentAmalgamation {
     for (const c in this.components) {
       this.components[c].itemColor = itemColor;
     }
+  }
+}
+
+class YSymmetricCoupledComponents {
+  constructor() {
+    this.left = 0;
+    this.right = 0;
+    this.components = [];
+    this.forwardPosition = 0; //x plane
+    this.verticalPosition = 0; //y plane
+    this.itemScale = createVector(1, 1, 1);
+  }
+
+  drawItem() {
+    push();
+    translate(
+      this.forwardPosition,
+      this.verticalPosition,
+      0,
+    );
+    scale(this.itemScale);
+    for (const c in this.components) {
+      this.components[c].drawItem();
+    }
+    pop();
+  }
+
+  setXRotation(xRotation) {
+    this.left.xRotation = xRotation;
+    this.right.xRotation = xRotation;
+  }
+
+  setYRotation(yRotation) {
+    this.left.yRotation = yRotation;
+    this.right.yRotation = -yRotation;
+  }
+
+  setZRotation(zRotation) {
+    this.left.zRotation = zRotation;
+    this.right.zRotation = -zRotation;
+  }
+
+  setHorizontalPosition(horizontalPosition) {
+    this.left.horizontalPosition = horizontalPosition;
+    this.right.horizontalPosition = -horizontalPosition;
   }
 }
 
