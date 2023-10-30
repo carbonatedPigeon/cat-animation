@@ -31,10 +31,10 @@ class Eyebrows extends ComponentAmalgamation {
     this.eyebrowColor = (0, 0, 0);
     this.leftEyebrowAngle = 0;
     this.rightEyebrowAngle = 0;
-    this.leftEyebrowPosition = createVector(22, -15, 60);
-    this.rightEyebrowPosition = createVector(-22, -15, 60);
-    this.leftEyebrowSize = createVector(15, 5, 10);
-    this.rightEyebrowSize = createVector(15, 5, 10);
+    this.leftEyebrowPosition = createVector(-60, -15, 22);
+    this.rightEyebrowPosition = createVector(-60, -15, -22);
+    this.leftEyebrowSize = createVector(10, 5, 15);
+    this.rightEyebrowSize = createVector(10, 5, 15);
 
     this.leftEyebrow = new Eyebrow(22, 20, 0);
     this.rightEyebrow = new Eyebrow(-22, -20, 0);
@@ -207,7 +207,7 @@ class Head extends ComponentAmalgamation {
     this.hair = new Hair();
     this.components = [
       this.eyes,
-      // this.eyebrows,
+      this.eyebrows,
       // this.eyelashes,
       this.headShape,
       this.hair,
