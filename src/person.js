@@ -6,7 +6,7 @@ class Person extends ComponentAmalgamation {
     this.body = new Body();
     this.legs = new Legs();
     this.components = [
-      this.head,
+      // this.head,
       this.body,
       this.legs,
     ];
@@ -265,9 +265,8 @@ class Legs extends ComponentAmalgamation {
   constructor() {
     super();
     this.legColor = color(255, 255, 225);
-    this.leftLeg = new Leg(75, -15);
-    this.rightLeg = new Leg(-75, 15);
-    this.leftLeg.forwardPosition = 75;
+    this.leftLeg = new Leg(75, 50);
+    this.rightLeg = new Leg(-75, -50);
     this.components = [
       this.leftLeg,
       this.rightLeg,
@@ -282,9 +281,9 @@ class Leg extends CylinderComponent {
     this.radius = 25;
     this.itemHeight = 125;
     this.xRotation = 90;
-    this.forwardPosition = forwardPosition;
+    this.forwardPosition = -100;
     this.verticalPosition = 300;
-    this.horizontalPosition = 100;
+    this.horizontalPosition = forwardPosition;
     this.zRotation = zRotation;
   }
 }
