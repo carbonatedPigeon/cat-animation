@@ -44,7 +44,7 @@ class CouchBack extends CouchBoxComponent {
     this.itemWidth = (couchDimensions.cushionWidth * 2) + (couchDimensions.cushionHeight * 2)
     this.itemHeight = 125;
     //setting item position
-    this.forwardPosition = -((couchDimensions.cushionWidth / 2) + (this.itemDepth / 2));
+    this.forwardPosition = (couchDimensions.cushionWidth / 2) + (this.itemDepth / 2);
     this.verticalPosition = -12.5;
     this.horizontalPosition = 0;
     this.position = createVector(
@@ -116,7 +116,7 @@ class CouchBackCushion extends CouchBoxComponent {
     this.itemHeight = 60; //y plane
     this.itemWidth = couchDimensions.cushionWidth; //z plane
     this.zRotation = -15;
-    this.forwardPosition = -30; //x plane
+    this.forwardPosition = 30; //x plane
     this.verticalPosition = -45; //y plane
     this.horizontalPosition = horizontalPosition; //z plane
   }
@@ -163,7 +163,7 @@ class CouchBottomSection extends CouchBoxComponent {
     this.itemDepth = 100;
     this.itemHeight = 40;
     this.itemWidth = 200;
-    this.forwardPosition = 10;
+    this.forwardPosition = -10;
     this.verticalPosition = 30;
     this.horizontalPosition = 0;
   }
