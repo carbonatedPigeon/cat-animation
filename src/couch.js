@@ -18,49 +18,18 @@ class CouchBoxComponent extends BoxComponent {
 class Couch extends ComponentAmalgamation {
   constructor() {
     super();
+    //setting up couch components
     this.couchDimensions = new CouchDimensions();
     this.couchBack = new CouchBack(this.couchDimensions);
-    //setting up seat cushions
-    let leftCushionHorizontalPosition = -(this.couchDimensions.cushionWidth / 2);
-    this.leftSeatCushion = new CouchSeatCushion(
-      this.couchDimensions,
-      leftCushionHorizontalPosition
-    );
-    let rightCushionHorizontalPosition = -leftCushionHorizontalPosition;
-    this.rightSeatCushion = new CouchSeatCushion(
-      this.couchDimensions,
-      rightCushionHorizontalPosition
-    );
-    //setting up back cushions
-    this.leftBackCushion = new CouchBackCushion(
-      this.couchDimensions,
-      leftCushionHorizontalPosition
-    );
-    this.rightBackCushion = new CouchBackCushion(
-      this.couchDimensions,
-      rightCushionHorizontalPosition
-    );
-    //setting up arms
-    let leftArmHorizontalPosition = -(this.couchDimensions.cushionWidth + (this.couchDimensions.cushionHeight / 2))
-    this.leftArm = new CouchArm(
-      this.couchDimensions,
-      leftArmHorizontalPosition
-    );
-    let rightArmHorizontalPosition = this.couchDimensions.cushionWidth + (this.couchDimensions.cushionHeight / 2)
-    this.rightArm = new CouchArm(
-      this.couchDimensions,
-      rightArmHorizontalPosition
-    );
-    //setting up bottom section
+    this.couchSeatCushions = new CouchSeatCushions(this.couchDimensions);
+    this.couchBackCushions = new CouchBackCushions(this.couchDimensions);
+    this.couchArms = new CouchArms(this.couchDimensions);
     this.bottomSection = new CouchBottomSection();
     this.components = [
       this.couchBack,
-      this.leftSeatCushion,
-      this.rightSeatCushion,
-      this.leftBackCushion,
-      this.rightBackCushion,
-      this.leftArm,
-      this.rightArm,
+      this.couchSeatCushions,
+      this.couchBackCushions,
+      this.couchArms,
       this.bottomSection
     ];
   }
@@ -86,6 +55,26 @@ class CouchBack extends CouchBoxComponent {
   }
 }
 
+class CouchSeatCushions extends YSymmetricCoupledComponents {
+  constructor(couchDimensions) {
+    super();
+    let leftHorizontalPosition = -(couchDimensions.cushionWidth / 2);
+    this.left = new CouchSeatCushion(
+      couchDimensions,
+      leftHorizontalPosition
+    );
+    let rightHorizontalPosition = -leftHorizontalPosition;
+    this.right = new CouchSeatCushion(
+      couchDimensions,
+      rightHorizontalPosition
+    );
+    this.components = [
+      this.left,
+      this.right,
+    ]
+  }
+}
+
 
 class CouchSeatCushion extends CouchBoxComponent {
   constructor(couchDimensions, horizontalPosition) {
@@ -100,6 +89,26 @@ class CouchSeatCushion extends CouchBoxComponent {
 }
 
 
+class CouchBackCushions extends YSymmetricCoupledComponents {
+  constructor(couchDimensions)  {
+    super();
+    let leftHorizontalPosition = -(couchDimensions.cushionWidth / 2);
+    let rightHorizontalPosition = -leftHorizontalPosition;
+    this.left = new CouchBackCushion(
+      couchDimensions,
+      leftHorizontalPosition
+    );
+    this.right = new CouchBackCushion(
+      couchDimensions,
+      rightHorizontalPosition
+    );
+    this.components = [
+      this.left,
+      this.right,
+    ]
+  }
+}
+
 class CouchBackCushion extends CouchBoxComponent {
   constructor(couchDimensions, horizontalPosition) {
     super();
@@ -110,6 +119,27 @@ class CouchBackCushion extends CouchBoxComponent {
     this.forwardPosition = -30; //x plane
     this.verticalPosition = -45; //y plane
     this.horizontalPosition = horizontalPosition; //z plane
+  }
+}
+
+
+class CouchArms extends YSymmetricCoupledComponents {
+  constructor(couchDimensions) {
+    super();
+    let leftHorizontalPosition = -(couchDimensions.cushionWidth + (couchDimensions.cushionHeight / 2))
+    this.left = new CouchArm(
+      couchDimensions,
+      leftHorizontalPosition
+    );
+    let rightHorizontalPosition = couchDimensions.cushionWidth + (couchDimensions.cushionHeight / 2)
+    this.right = new CouchArm(
+      couchDimensions,
+      rightHorizontalPosition
+    );
+    this.components = [
+      this.left,
+      this.right,
+    ]
   }
 }
 
