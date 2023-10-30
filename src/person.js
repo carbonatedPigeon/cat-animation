@@ -84,57 +84,12 @@ class Eyebrow extends BoxComponent {
   }
 }
 
-class Eyes {
+class Eyes extends ComponentAmalgamation {
   constructor() {
-    //white of eye variables
-    this.eyePosition = createVector(-60, 0, 22);
-    this.eyeSize = 10;
-    //pupil variables
-    //default pupil color == black
-    this.pupilColor = (0, 0, 0);
-    this.pupilPosition = createVector(-65, 0, 22);
-    this.pupilSize = 8;
-  }
-  
-  drawItem() {
-    this.drawWhites();
-    this.drawPupils();
-  }
-  
-  drawPupils() {
-    //left
-    fill(this.pupilColor)
-    push();
-    translate(this.pupilPosition);
-    sphere(this.pupilSize);
-    pop();
-    //right
-    push();
-    translate(this.pupilPosition.x, this.pupilPosition.y, -this.pupilPosition.z);
-    sphere(this.pupilSize);
-    pop();
-  }
-  
-  drawWhites() {
-      //filling in as white
-      fill(255);
-      push();
-      //left
-      translate(this.eyePosition);
-      sphere(this.eyeSize);
-      pop();
-      //right
-      push();
-      translate(this.eyePosition.x, this.eyePosition.y, -this.eyePosition.z);
-      sphere(this.eyeSize);
-      pop();
-    }
-}
-
-class Eyes2 extends ComponentAmalgamation {
-  constructor() {
-    this.leftEye = new Eye(0);
-    this.rightEye = new Eye(0);
+    super();
+    this.forwardPosition = -60;
+    this.leftEye = new Eye(22);
+    this.rightEye = new Eye(-22);
     this.components = [
       this.leftEye,
       this.rightEye,
@@ -150,7 +105,6 @@ class Eye extends ComponentAmalgamation {
     this.components = [
       new Sclera(),
       this.pupil,
-      new Eyelash(),
     ];
   }
 }
@@ -158,43 +112,48 @@ class Eye extends ComponentAmalgamation {
 class Sclera extends SphereComponent {
   constructor() {
     super();
+    this.itemColor = color(255);
+    this.size = 10;
   }
 }
 
 class Pupil extends SphereComponent {
   constructor() {
     super();
+    this.size = 8;
+    this.forwardPosition = -5;
+  }
+}
+
+class Eyelashes extends ComponentAmalgamation {
+  constructor() {
+    super();
+    this.forwardPosition = -55;
+    this.verticalPosition = 5;
+    this.leftEyelash = new Eyelash(25, -90);
+    this.rightEyelash = new Eyelash(-25, 90);
+    this.components = [
+      this.leftEyelash,
+      this.rightEyelash,
+    ];
   }
 }
 
 class Eyelash extends CustomShapeComponent {
-  constructor() {
+  constructor(horizontalPosition, yRotation) {
     super();
+    this.x1 = 0;
+    this.y1 = 0;
+    this.x2 = 0;
+    this.y2 = -15;
+    this.x3 = 15;
+    this.y3 = -7;
+    this.yRotation = yRotation;
+    this.horizontalPosition = horizontalPosition;
   }
-}
 
-class Eyelashes {
-  constructor() {
-    //eyelash variables
-    this.eyelashColor = (0, 0, 0);
-    this.eyelashPosition = createVector(-55, 5, 25);
-    this.eyelashDimensions = (0, 0, 0, -15, 15, -7);
-  }
-  
-  drawItem() {
-    //left
-    fill(this.eyelashColor)
-    push();
-    translate(this.eyelashPosition);
-    rotateY(-90);
-    triangle(0, 0, 0, -15, 15, -7);
-    pop();
-    //right
-    push();
-    translate(this.eyelashPosition.x, this.eyelashPosition.y, -this.eyelashPosition.z);
-    rotateY(90);
-    triangle(0, 0, 0, -15, 15, -7);
-    pop();
+  constructComponent() {
+    triangle(this.x1, this.y1, this.x2, this.y2, this.x3, this.y3);
   }
 }
 
