@@ -177,7 +177,7 @@ class Eyelashes {
   constructor() {
     //eyelash variables
     this.eyelashColor = (0, 0, 0);
-    this.eyelashPosition = createVector(25, 5, 55);
+    this.eyelashPosition = createVector(-55, 5, 25);
     this.eyelashDimensions = (0, 0, 0, -15, 15, -7);
   }
   
@@ -186,12 +186,13 @@ class Eyelashes {
     fill(this.eyelashColor)
     push();
     translate(this.eyelashPosition);
+    rotateY(-90);
     triangle(0, 0, 0, -15, 15, -7);
     pop();
     //right
     push();
-    translate(-this.eyelashPosition.x, this.eyelashPosition.y, this.eyelashPosition.z);
-    rotateY(180);
+    translate(this.eyelashPosition.x, this.eyelashPosition.y, -this.eyelashPosition.z);
+    rotateY(90);
     triangle(0, 0, 0, -15, 15, -7);
     pop();
   }
@@ -208,7 +209,7 @@ class Head extends ComponentAmalgamation {
     this.components = [
       this.eyes,
       this.eyebrows,
-      // this.eyelashes,
+      this.eyelashes,
       this.headShape,
       this.hair,
     ]
