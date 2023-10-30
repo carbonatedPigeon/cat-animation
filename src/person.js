@@ -87,12 +87,12 @@ class Eyebrow extends BoxComponent {
 class Eyes {
   constructor() {
     //white of eye variables
-    this.eyePosition = createVector(22, 0, 55);
+    this.eyePosition = createVector(-60, 0, 22);
     this.eyeSize = 10;
     //pupil variables
     //default pupil color == black
     this.pupilColor = (0, 0, 0);
-    this.pupilPosition = createVector(22, 0, 60);
+    this.pupilPosition = createVector(-65, 0, 22);
     this.pupilSize = 8;
   }
   
@@ -110,7 +110,7 @@ class Eyes {
     pop();
     //right
     push();
-    translate(-this.pupilPosition.x, this.pupilPosition.y, this.pupilPosition.z);
+    translate(this.pupilPosition.x, this.pupilPosition.y, -this.pupilPosition.z);
     sphere(this.pupilSize);
     pop();
   }
@@ -125,7 +125,7 @@ class Eyes {
       pop();
       //right
       push();
-      translate(-this.eyePosition.x, this.eyePosition.y, this.eyePosition.z);
+      translate(this.eyePosition.x, this.eyePosition.y, -this.eyePosition.z);
       sphere(this.eyeSize);
       pop();
     }
@@ -206,7 +206,7 @@ class Head extends ComponentAmalgamation {
     this.headShape = new HeadShape();
     this.hair = new Hair();
     this.components = [
-      // this.eyes,
+      this.eyes,
       // this.eyebrows,
       // this.eyelashes,
       this.headShape,
