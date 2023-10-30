@@ -6,7 +6,7 @@ class Person extends ComponentAmalgamation {
     this.body = new Body();
     this.legs = new Legs();
     this.components = [
-      // this.head,
+      this.head,
       this.body,
       this.legs,
     ];
@@ -206,9 +206,9 @@ class Head extends ComponentAmalgamation {
     this.headShape = new HeadShape();
     this.hair = new Hair();
     this.components = [
-      this.eyes,
-      this.eyebrows,
-      this.eyelashes,
+      // this.eyes,
+      // this.eyebrows,
+      // this.eyelashes,
       this.headShape,
       this.hair,
     ]
@@ -228,9 +228,9 @@ class Hair extends SphereComponent {
   constructor() {
     super();
     this.size = 50;
-    this.itemScale = createVector(1.5, 1.5, 1.2);
-    this.verticalPosition = -10;
-    this.horizontalPosition = -7;
+    this.itemScale = createVector(1.2, 1.5, 1.5);
+    this.forwardPosition = 10;
+    this.verticalPosition = -7;
   }
 }
 
