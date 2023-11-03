@@ -77,7 +77,7 @@ class ChairCusion extends BoxComponent {
     constructor(chairDimensions) {
         super();
         //default color is white
-        this.itemColor = color(255);
+        this.itemTexture = chairCushionTexture;
         this.forwardPosition = (chairDimensions.chairWidth * 0.1 / 2) - chairDimensions.boxWidth;
         this.verticalPosition = -chairDimensions.boxWidth;
         this.horizontalPosition = 0;
