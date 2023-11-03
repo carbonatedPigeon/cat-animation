@@ -2,13 +2,11 @@ class Cup extends CustomShapeComponent {
     constructor() {
         super();
         //cup is red
-        this.itemColor = color(255, 50, 50)
+        this.itemColor = color(255, 50, 50);
         this.itemHeight = 50;
     }
 
     constructComponent() {
-        fill(this.itemColor);
-
         beginShape();
         vertex(-10, 0, -5);
         vertex(-10, 0, 5);
