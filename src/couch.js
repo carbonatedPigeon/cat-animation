@@ -35,6 +35,7 @@ class CouchBack extends BoxComponent {
       this.verticalPosition,
       this.horizontalPosition
     );
+    this.itemTexture = couchTexture;
   }
 }
 
@@ -68,6 +69,7 @@ class CouchSeatCushion extends BoxComponent {
     this.forwardPosition = 0; //x plane
     this.verticalPosition = 0; //y plane
     this.horizontalPosition = horizontalPosition; //z plane
+    this.itemTexture = couchTexture;
   }
 }
 
@@ -102,6 +104,7 @@ class CouchBackCushion extends BoxComponent {
     this.forwardPosition = 30; //x plane
     this.verticalPosition = -45; //y plane
     this.horizontalPosition = horizontalPosition; //z plane
+    this.itemTexture = couchTexture;
   }
 }
 
@@ -136,6 +139,7 @@ class CouchArm extends BoxComponent {
     this.fowardPosition = 0;
     this.verticalPosition = 0;
     this.horizontalPosition = horizontalPosition;
+    this.itemTexture = couchTexture;
   }
 }
 
@@ -149,6 +153,7 @@ class CouchBottomSection extends BoxComponent {
     this.forwardPosition = -10;
     this.verticalPosition = 30;
     this.horizontalPosition = 0;
+    this.itemTexture = couchTexture;
   }
 }
 

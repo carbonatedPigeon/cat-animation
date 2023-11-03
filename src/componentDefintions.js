@@ -34,20 +34,15 @@ class ComponentAmalgamation {
     pop();
   }
   
-  setItemColor(itemColor, isTexture) {
-    if (isTexture) {
-      texture(itemColor);
-      textureMode(NORMAL);
-    } else {
-      for (const c in this.components) {
-        this.components[c].itemColor = itemColor;
-      }
+  setItemColor(itemColor) {
+    for (const c in this.components) {
+      this.components[c].itemColor = itemColor;
     }
   }
   
   setItemTexture(itemTexture) {
     for (const c in this.components) {
-      this.components[c].itemColor = itemColor;
+      this.components[c].itemTexture = itemTexture;
     }
   }
 }
@@ -60,6 +55,7 @@ class YSymmetricCoupledComponents {
     this.forwardPosition = 0; //x plane
     this.verticalPosition = 0; //y plane
     this.itemScale = createVector(1, 1, 1);
+    this.itemColor = color(0);
   }
 
   drawItem() {
@@ -129,7 +125,12 @@ class Component {
   }
 
   setItemColor() {
-    fill(this.itemColor);
+    if (this.itemTexture == null) {
+      fill(this.itemColor);
+    } else {
+      texture(this.itemTexture);
+      textureMode(NORMAL);
+    }
   }
 }
 
