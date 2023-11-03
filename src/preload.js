@@ -6,7 +6,7 @@ let tableTexture;
 let floorTexture;
 let wallTexture;
 let tvStandTexture;
-let tvImage;
+let tvScreenImage;
 let windowImage;
 let shirtTexture;
 
@@ -20,7 +20,7 @@ function preload() {
     // cupImg = loadImage('cupTexture3.jpeg');
     // couchImg = loadImage('upholstryTexture4.jpeg');
     // tvStandImg = loadImage('woodTexture9.jpeg');
-    // tvImg = loadImage('pic.jpeg');
+    tvScreenImage = loadImage('resource\\tvScreenImage.jpeg');
     // windowImage = loadImage('outside.jpeg');
     // shirtImg = loadImage('upholstryTexture3.jpeg');
 }
