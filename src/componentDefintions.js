@@ -40,7 +40,6 @@ class ComponentAmalgamation {
   }
 }
 
-
 class YSymmetricCoupledComponents {
   constructor() {
     this.left = 0;
@@ -206,5 +205,18 @@ class CylinderComponent extends Component {
 
   drawShape() {
     cylinder(this.radius, this.itemHeight);
+  }
+}
+
+class SquareComponent extends Component {
+  constructor() {
+    super();
+    this.xCoordinate = 0;
+    this.yCoordinate = 0;
+    this.sideLength = 0;
+  }
+
+  drawShape() {
+    square(this.xCoordinate, this.yCoordinate, this.sideLength);
   }
 }
