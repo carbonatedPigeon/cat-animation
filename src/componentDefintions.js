@@ -208,6 +208,7 @@ class CylinderComponent extends Component {
   }
 }
 
+
 class SquareComponent extends Component {
   constructor() {
     super();
@@ -218,5 +219,20 @@ class SquareComponent extends Component {
 
   drawShape() {
     square(this.xCoordinate, this.yCoordinate, this.sideLength);
+  }
+}
+
+
+class RectComponent extends Component {
+  constructor() {
+    super();
+    this.xCoordinate = 0;
+    this.yCoordinate = 0;
+    this.itemWidth = 0;
+    this.itemHeight = 0;
+  }
+
+  drawShape() {
+    rect(this.xCoordinate, this.yCoordinate, this.itemWidth, this.itemHeight);
   }
 }
