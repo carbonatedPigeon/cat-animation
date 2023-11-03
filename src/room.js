@@ -54,6 +54,7 @@ class Wall extends SquareComponent {
 class Floor extends SquareComponent {
     constructor() {
         super();
+        this.itemTexture = floorTexture;
         this.forwardPosition = -500;
         this.horizontalPosition = -500;
         this.xRotation = 90;
