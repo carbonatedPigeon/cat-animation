@@ -1,5 +1,9 @@
 /*
-* Drawable item made up of drawable components
+ok, ok, i know, a lot of duplicate code here (classes have same attributes, i.e. positional & rotational values) 
+which would be easily solved by having each class inherit from a parent class and setting the 
+those attributes there. HOWEVER javascript does not allow grandchildren direct access to grandparent 
+class attributes (boo) so I'd have to write getter/setter functions for each class for each attribute 
+(*starts barfing uncontrollably*). Ain't doin all that. So... yeah, it be how it be. 
 */
 class ComponentAmalgamation {
   constructor() {
@@ -30,7 +34,18 @@ class ComponentAmalgamation {
     pop();
   }
   
-  setItemColor(itemColor) {
+  setItemColor(itemColor, isTexture) {
+    if (isTexture) {
+      texture(itemColor);
+      textureMode(NORMAL);
+    } else {
+      for (const c in this.components) {
+        this.components[c].itemColor = itemColor;
+      }
+    }
+  }
+  
+  setItemTexture(itemTexture) {
     for (const c in this.components) {
       this.components[c].itemColor = itemColor;
     }
@@ -82,7 +97,7 @@ class YSymmetricCoupledComponents {
   }
 }
 
-class CustomShapeComponent {
+class Component {
   constructor() {
     this.forwardPosition = 0; //x plane
     this.verticalPosition = 0; //y plane
@@ -92,6 +107,35 @@ class CustomShapeComponent {
     this.yRotation = 0;
     this.zRotation = 0;
     this.itemColor = color(0);
+    this.itemTexture = null;
+  }
+
+  setItemPosition(x, y, z) {
+    //setting forwardPosition if arg provided
+    if (x != undefined) { this.forwardPosition = x; }
+    //setting verticalPosition if arg provided
+    if (y != undefined) { this.verticalPosition = y; }
+    //setting horizontalPosition if arg provided
+    if (z != undefined) { this.horizontalPosition = z; }
+  }
+
+  setItemRotation(x, y, z) {
+    //setting forwardPosition if arg provided
+    if (x != undefined) { this.xRotation = x; }
+    //setting verticalPosition if arg provided
+    if (y != undefined) { this.yRotation = y; }
+    //setting horizontalPosition if arg provided
+    if (z != undefined) { this.zRotation = z; }
+  }
+
+  setItemColor() {
+    fill(this.itemColor);
+  }
+}
+
+class CustomShapeComponent extends Component {
+  constructor() {
+    super();
   }
 
   drawItem() {
@@ -110,26 +154,15 @@ class CustomShapeComponent {
     pop();
   }
 
-  setItemColor() {
-    fill(this.itemColor);
-  }
-
   constructComponent() {}
 }
 
-class BoxComponent {
+class BoxComponent extends Component {
   constructor() {
+    super();
     this.itemDepth = 0; //x plane
     this.itemHeight = 0; //y plane
     this.itemWidth = 0; //z plane
-    this.forwardPosition = 0; //x plane
-    this.verticalPosition = 0; //y plane
-    this.horizontalPosition = 0; //z plane
-    this.itemScale = createVector(1, 1, 1);
-    this.xRotation = 0;
-    this.yRotation = 0;
-    this.zRotation = 0;
-    this.itemColor = color(0);
   }
   
   drawItem() {
@@ -147,10 +180,6 @@ class BoxComponent {
     box(this.itemDepth, this.itemHeight, this.itemWidth);
     pop();
   }
-  
-  setItemColor() {
-    fill(this.itemColor);
-  }
 
   setItemDimensions(itemDepth, itemHeight, itemWidth) {
     //setting itemDepth if arg provided
@@ -160,34 +189,13 @@ class BoxComponent {
     //setting itemWidth if arg provided
     if (itemWidth != undefined) { this.itemWidth = itemWidth; }
   }
-
-  setItemPosition(x, y, z) {
-    //setting forwardPosition if arg provided
-    if (x != undefined) { this.forwardPosition = x; }
-    //setting verticalPosition if arg provided
-    if (y != undefined) { this.verticalPosition = y; }
-    //setting horizontalPosition if arg provided
-    if (z != undefined) { this.horizontalPosition = z; }
-  }
 }
 
 
-class SphereComponent {
+class SphereComponent extends Component {
   constructor() {
+    super();
     this.size = 0;
-    this.forwardPosition = 0; //x plane
-    this.verticalPosition = 0; //y plane
-    this.horizontalPosition = 0; //z plane
-    this.position = createVector(
-      this.forwardPosition, 
-      this.verticalPosition, 
-      this.horizontalPosition
-    );
-    this.itemScale = createVector(1, 1, 1);
-    this.xRotation = 0;
-    this.yRotation = 0;
-    this.zRotation = 0;
-    this.itemColor = color(0);
   }
   
   drawItem() {
@@ -205,44 +213,15 @@ class SphereComponent {
     sphere(this.size);
     pop();
   }
-  
-  setItemColor() {
-    fill(this.itemColor);
-  }
-
-  setItemDimensions(itemDepth, itemHeight, itemWidth) {
-    //setting itemDepth if arg provided
-    if (itemDepth != undefined) { this.itemDepth = itemDepth; }
-    //setting itemHeight if arg provided
-    if (itemHeight != undefined) { this.itemHeight = itemHeight; }
-    //setting itemWidth if arg provided
-    if (itemWidth != undefined) { this.itemWidth = itemWidth; }
-  }
-
-  setItemPosition(x, y, z) {
-    //setting forwardPosition if arg provided
-    if (x != undefined) { this.forwardPosition = x; }
-    //setting verticalPosition if arg provided
-    if (y != undefined) { this.verticalPosition = y; }
-    //setting horizontalPosition if arg provided
-    if (z != undefined) { this.horizontalPosition = z; }
-  }
 }
 
 
-class EllipsoidComponent {
+class EllipsoidComponent extends Component {
   constructor() {
+    super();
     this.itemDepth = 0; //x plane
     this.itemHeight = 0; //y plane
     this.itemWidth = 0; //z plane
-    this.forwardPosition = 0; //x plane
-    this.verticalPosition = 0; //y plane
-    this.horizontalPosition = 0; //z plane
-    this.itemScale = createVector(1, 1, 1);
-    this.xRotation = 0;
-    this.yRotation = 0;
-    this.zRotation = 0;
-    this.itemColor = color(0);
   }
   
   drawItem() {
@@ -260,42 +239,13 @@ class EllipsoidComponent {
     ellipsoid(this.itemDepth, this.itemHeight, this.itemWidth);
     pop();
   }
-  
-  setItemColor() {
-    fill(this.itemColor);
-  }
-
-  setItemDimensions(itemDepth, itemHeight, itemWidth) {
-    //setting itemDepth if arg provided
-    if (itemDepth != undefined) { this.itemDepth = itemDepth; }
-    //setting itemHeight if arg provided
-    if (itemHeight != undefined) { this.itemHeight = itemHeight; }
-    //setting itemWidth if arg provided
-    if (itemWidth != undefined) { this.itemWidth = itemWidth; }
-  }
-
-  setItemPosition(x, y, z) {
-    //setting forwardPosition if arg provided
-    if (x != undefined) { this.forwardPosition = x; }
-    //setting verticalPosition if arg provided
-    if (y != undefined) { this.verticalPosition = y; }
-    //setting horizontalPosition if arg provided
-    if (z != undefined) { this.horizontalPosition = z; }
-  }
 }
 
-class CylinderComponent {
+class CylinderComponent extends Component {
   constructor() {
+    super();
     this.radius = 0;
     this.itemHeight = 0;
-    this.forwardPosition = 0; //x plane
-    this.verticalPosition = 0; //y plane
-    this.horizontalPosition = 0; //z plane
-    this.itemScale = createVector(1, 1, 1);
-    this.xRotation = 0;
-    this.yRotation = 0;
-    this.zRotation = 0;
-    this.itemColor = color(0);
   }
 
   drawItem() {
@@ -312,27 +262,5 @@ class CylinderComponent {
     rotateZ(this.zRotation);
     cylinder(this.radius, this.itemHeight);
     pop();
-  }
-  
-  setItemColor() {
-    fill(this.itemColor);
-  }
-
-  setItemDimensions(itemDepth, itemHeight, itemWidth) {
-    //setting itemDepth if arg provided
-    if (itemDepth != undefined) { this.itemDepth = itemDepth; }
-    //setting itemHeight if arg provided
-    if (itemHeight != undefined) { this.itemHeight = itemHeight; }
-    //setting itemWidth if arg provided
-    if (itemWidth != undefined) { this.itemWidth = itemWidth; }
-  }
-
-  setItemPosition(x, y, z) {
-    //setting forwardPosition if arg provided
-    if (x != undefined) { this.forwardPosition = x; }
-    //setting verticalPosition if arg provided
-    if (y != undefined) { this.verticalPosition = y; }
-    //setting horizontalPosition if arg provided
-    if (z != undefined) { this.horizontalPosition = z; }
   }
 }
