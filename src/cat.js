@@ -186,7 +186,7 @@ class CatLeg extends CylinderComponent {
   }
 }
 
-class CatEar extends CustomShapeComponent {
+class CatEar extends Component {
   constructor() {
     super();
     this.itemColor = color(50);
@@ -198,7 +198,7 @@ class CatEar extends CustomShapeComponent {
     this.zRotation = 5;
   }
     
-  constructComponent() {
+  drawShape() {
     const point = [5, -100, 30];
 
     beginShape();
@@ -251,7 +251,7 @@ class CatEar extends CustomShapeComponent {
   }
 }
 
-class CatTail extends CustomShapeComponent {
+class CatTail extends Component {
   constructor() {
     super();
     this.forwardPosition = 450;
@@ -261,7 +261,7 @@ class CatTail extends CustomShapeComponent {
     this.yRotation = 180;
   }
   
-  constructComponent() {
+  drawShape() {
     push();
     translate(-13, -100, 0);
     rotateZ(-10);
@@ -464,14 +464,14 @@ class CatHeadDimensions {
   }
 }
 
-class CatJaw extends CustomShapeComponent {
+class CatJaw extends Component {
   constructor(catHeadDimensions) {
     super();
     this.itemColor = color(50);
     this.dimensions = catHeadDimensions;
   }
   
-  constructComponent() {
+  drawShape() {
     const HEIGHT_OF_NOSE = this.dimensions.heightOfNose;
     const BOTTOM_WIDTH_OF_SNOUT = this.dimensions.bottomWidthOfSnout;
     //lower jaw
@@ -588,14 +588,14 @@ class CatJaw extends CustomShapeComponent {
   }
 }
 
-class CatHeadShape extends CustomShapeComponent {
+class CatHeadShape extends Component {
   constructor(catHeadDimensions) {
     super();
     this.itemColor = color(50);
     this.dimensions = catHeadDimensions;
   }
   
-  constructComponent() {
+  drawShape() {
     const BOTTOM_WIDTH_OF_SNOUT = this.dimensions.bottomWidthOfSnout;
     const HEIGHT_OF_NOSE = this.dimensions.heightOfNose;
     const TOP_WIDTH_OF_SNOUT = this.dimensions.topWidthOfSnout;

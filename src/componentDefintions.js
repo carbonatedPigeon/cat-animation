@@ -1,10 +1,3 @@
-/*
-ok, ok, i know, a lot of duplicate code here (classes have same attributes, i.e. positional & rotational values) 
-which would be easily solved by having each class inherit from a parent class and setting the 
-those attributes there. HOWEVER javascript does not allow grandchildren direct access to grandparent 
-class attributes (boo) so I'd have to write getter/setter functions for each class for each attribute 
-(*starts barfing uncontrollably*). Ain't doin all that. So... yeah, it be how it be. 
-*/
 class ComponentAmalgamation {
   constructor() {
     this.components = [];
@@ -46,6 +39,7 @@ class ComponentAmalgamation {
     }
   }
 }
+
 
 class YSymmetricCoupledComponents {
   constructor() {
@@ -93,6 +87,7 @@ class YSymmetricCoupledComponents {
   }
 }
 
+
 class Component {
   constructor() {
     this.forwardPosition = 0; //x plane
@@ -105,6 +100,24 @@ class Component {
     this.itemColor = color(0);
     this.itemTexture = null;
   }
+
+  drawItem() {
+    this.setItemColor();
+    push();
+    translate(
+      this.forwardPosition,
+      this.verticalPosition,
+      this.horizontalPosition
+    );
+    scale(this.itemScale);
+    rotateX(this.xRotation);
+    rotateY(this.yRotation);
+    rotateZ(this.zRotation);
+    this.drawShape();
+    pop();
+  }
+
+  drawShape() {}
 
   setItemPosition(x, y, z) {
     //setting forwardPosition if arg provided
@@ -134,29 +147,6 @@ class Component {
   }
 }
 
-class CustomShapeComponent extends Component {
-  constructor() {
-    super();
-  }
-
-  drawItem() {
-    this.setItemColor();
-    push();
-    translate(
-      this.forwardPosition,
-      this.verticalPosition,
-      this.horizontalPosition
-    );
-    scale(this.itemScale);
-    rotateX(this.xRotation);
-    rotateY(this.yRotation);
-    rotateZ(this.zRotation);
-    this.constructComponent();
-    pop();
-  }
-
-  constructComponent() {}
-}
 
 class BoxComponent extends Component {
   constructor() {
@@ -165,21 +155,9 @@ class BoxComponent extends Component {
     this.itemHeight = 0; //y plane
     this.itemWidth = 0; //z plane
   }
-  
-  drawItem() {
-    this.setItemColor();
-    push();
-    translate(
-      this.forwardPosition,
-      this.verticalPosition,
-      this.horizontalPosition
-    );
-    scale(this.itemScale);
-    rotateX(this.xRotation);
-    rotateY(this.yRotation);
-    rotateZ(this.zRotation);
+
+  drawShape() {
     box(this.itemDepth, this.itemHeight, this.itemWidth);
-    pop();
   }
 
   setItemDimensions(itemDepth, itemHeight, itemWidth) {
@@ -198,21 +176,9 @@ class SphereComponent extends Component {
     super();
     this.size = 0;
   }
-  
-  drawItem() {
-    this.setItemColor();
-    push();
-    translate(
-      this.forwardPosition,
-      this.verticalPosition,
-      this.horizontalPosition
-    );
-    scale(this.itemScale);
-    rotateX(this.xRotation);
-    rotateY(this.yRotation);
-    rotateZ(this.zRotation);
+
+  drawShape() {
     sphere(this.size);
-    pop();
   }
 }
 
@@ -225,22 +191,11 @@ class EllipsoidComponent extends Component {
     this.itemWidth = 0; //z plane
   }
   
-  drawItem() {
-    this.setItemColor();
-    push();
-    translate(
-      this.forwardPosition,
-      this.verticalPosition,
-      this.horizontalPosition
-    );
-    scale(this.itemScale);
-    rotateX(this.xRotation);
-    rotateY(this.yRotation);
-    rotateZ(this.zRotation);
+  drawShape() {
     ellipsoid(this.itemDepth, this.itemHeight, this.itemWidth);
-    pop();
   }
 }
+
 
 class CylinderComponent extends Component {
   constructor() {
@@ -249,19 +204,7 @@ class CylinderComponent extends Component {
     this.itemHeight = 0;
   }
 
-  drawItem() {
-    this.setItemColor();
-    push();
-    translate(
-      this.forwardPosition,
-      this.verticalPosition,
-      this.horizontalPosition
-    );
-    scale(this.itemScale);
-    rotateX(this.xRotation);
-    rotateY(this.yRotation);
-    rotateZ(this.zRotation);
+  drawShape() {
     cylinder(this.radius, this.itemHeight);
-    pop();
   }
 }

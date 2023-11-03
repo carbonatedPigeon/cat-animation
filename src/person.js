@@ -5,6 +5,7 @@ class Person extends ComponentAmalgamation {
     this.head = new Head();
     this.body = new Body();
     this.legs = new Legs();
+    this.arms = new Arms();
     this.components = [
       this.head,
       this.body,
@@ -123,7 +124,7 @@ class Eyelashes extends YSymmetricCoupledComponents {
   }
 }
 
-class Eyelash extends CustomShapeComponent {
+class Eyelash extends Component {
   constructor(horizontalPosition, yRotation) {
     super();
     this.x1 = 0;
@@ -136,7 +137,7 @@ class Eyelash extends CustomShapeComponent {
     this.horizontalPosition = horizontalPosition;
   }
 
-  constructComponent() {
+  drawShape() {
     triangle(this.x1, this.y1, this.x2, this.y2, this.x3, this.y3);
   }
 }

@@ -1,4 +1,4 @@
-class Cup extends CustomShapeComponent {
+class Cup extends Component {
     constructor() {
         super();
         //cup is red
@@ -6,7 +6,7 @@ class Cup extends CustomShapeComponent {
         this.itemHeight = 50;
     }
 
-    constructComponent() {
+    drawShape() {
         beginShape();
         vertex(-10, 0, -5);
         vertex(-10, 0, 5);
