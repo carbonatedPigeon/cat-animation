@@ -22,10 +22,12 @@ function draw() {
   noStroke();
   push();
   // setUpCat();
-  //rotateY(50);
+  //rotateY(180);
   // rotateZ(15);
   // rotateX(10);
-  let item = new Cat();
+  let item = new Couch();
+  // item.setItemColor(couchTexture, true);
+  //console.log(item.itemColor);
   item.drawItem();
   pop();
   
