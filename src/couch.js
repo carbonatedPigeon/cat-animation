@@ -1,20 +1,3 @@
-//textures
-let couchTexture;
-function preload() {
-  couchTexture = loadImage('resource\\upholstryTexture.jpeg')
-}
-
-class CouchBoxComponent extends BoxComponent {
-  constructor() {
-    super();
-  }
-  //overwriting parent setItemColor() function
-  setItemColor() {
-    texture(couchTexture);
-    textureMode(NORMAL);
-  }
-}
-
 class Couch extends ComponentAmalgamation {
   constructor() {
     super();
@@ -36,7 +19,7 @@ class Couch extends ComponentAmalgamation {
 }
 
 
-class CouchBack extends CouchBoxComponent {
+class CouchBack extends BoxComponent {
   constructor(couchDimensions) {
     super();
     //setting item dimensions
@@ -76,7 +59,7 @@ class CouchSeatCushions extends YSymmetricCoupledComponents {
 }
 
 
-class CouchSeatCushion extends CouchBoxComponent {
+class CouchSeatCushion extends BoxComponent {
   constructor(couchDimensions, horizontalPosition) {
     super();
     this.itemDepth = couchDimensions.cushionDepth; //x plane
@@ -109,7 +92,7 @@ class CouchBackCushions extends YSymmetricCoupledComponents {
   }
 }
 
-class CouchBackCushion extends CouchBoxComponent {
+class CouchBackCushion extends BoxComponent {
   constructor(couchDimensions, horizontalPosition) {
     super();
     this.itemDepth = couchDimensions.cushionHeight;//x plane
@@ -144,7 +127,7 @@ class CouchArms extends YSymmetricCoupledComponents {
 }
 
 
-class CouchArm extends CouchBoxComponent {
+class CouchArm extends BoxComponent {
   constructor(couchDimensions, horizontalPosition) {
     super();
     this.itemDepth = couchDimensions.cushionDepth;
@@ -157,7 +140,7 @@ class CouchArm extends CouchBoxComponent {
 }
 
 
-class CouchBottomSection extends CouchBoxComponent {
+class CouchBottomSection extends BoxComponent {
   constructor() {
     super();
     this.itemDepth = 100;
