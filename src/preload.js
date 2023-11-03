@@ -22,5 +22,5 @@ function preload() {
     // tvStandImg = loadImage('woodTexture9.jpeg');
     tvScreenImage = loadImage('resource\\tvScreenImage.jpeg');
     windowImage = loadImage('resource\\outside.jpeg');
-    // shirtImg = loadImage('upholstryTexture3.jpeg');
+    shirtTexture = loadImage('resource\\shirtTexture.jpeg');
 }

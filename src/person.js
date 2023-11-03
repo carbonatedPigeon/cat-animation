@@ -164,6 +164,7 @@ class Hair extends SphereComponent {
 class Body extends SphereComponent {
   constructor() {
     super();
+    this.itemTexture = shirtTexture;
     this.verticalPosition = 220;
     this.itemScale = createVector(1.5, 2, 1.2);
     this.size = 75;
