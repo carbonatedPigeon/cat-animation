@@ -58,22 +58,6 @@ function draw() {
   animationConductor.setScene();
 }
 
-function setScene() {
-  //sets inital positions of all objects in room
-  //initalizing all objects
-  let person = new Person();
-  
-  push();
-  translate(175, -20, 175);
-  scale(0.5, 0.5, 0.5);
-  rotateY(-110);
-  person();
-  pop();
-}
-
-function initializePerson () {
-
-}
 
 class AnimationConductor{
   constructor() {
@@ -116,8 +100,8 @@ class AnimationConductor{
     this.window.horizontalPosition = -700;
     this.window.itemScale = createVector(1.25, 1.5, 1);
     this.window.drawItem();
-
-
+    //setting up tv stand
+    this.tables['tv_stand'].forwardPosition = 450;
   }
 }
 
