@@ -1,92 +1,3 @@
-class ComponentAmalgamation {
-  constructor() {
-    this.components = [];
-    this.forwardPosition = 0; //x plane
-    this.verticalPosition = 0; //y plane
-    this.horizontalPosition = 0; //z plane
-    this.itemScale = createVector(1, 1, 1);
-    this.xRotation = 0;
-    this.yRotation = 0;
-    this.zRotation = 0;
-  }
-  
-  drawItem() {
-    push();
-    translate(
-      this.forwardPosition,
-      this.verticalPosition,
-      this.horizontalPosition
-    );
-    scale(this.itemScale);
-    rotateX(this.xRotation);
-    rotateY(this.yRotation);
-    rotateZ(this.zRotation);
-    for (const c in this.components) {
-      this.components[c].drawItem();
-    }
-    pop();
-  }
-  
-  setItemColor(itemColor) {
-    for (const c in this.components) {
-      this.components[c].itemColor = itemColor;
-    }
-  }
-  
-  setItemTexture(itemTexture) {
-    for (const c in this.components) {
-      this.components[c].itemTexture = itemTexture;
-    }
-  }
-}
-
-class YSymmetricCoupledComponents {
-  constructor() {
-    this.left = 0;
-    this.right = 0;
-    this.components = [];
-    this.forwardPosition = 0; //x plane
-    this.verticalPosition = 0; //y plane
-    this.itemScale = createVector(1, 1, 1);
-    this.itemColor = color(0);
-  }
-
-  drawItem() {
-    push();
-    translate(
-      this.forwardPosition,
-      this.verticalPosition,
-      0,
-    );
-    scale(this.itemScale);
-    for (const c in this.components) {
-      this.components[c].drawItem();
-    }
-    pop();
-  }
-
-  setXRotation(xRotation) {
-    this.left.xRotation = xRotation;
-    this.right.xRotation = xRotation;
-  }
-
-  setYRotation(yRotation) {
-    this.left.yRotation = yRotation;
-    this.right.yRotation = -yRotation;
-  }
-
-  setZRotation(zRotation) {
-    this.left.zRotation = zRotation;
-    this.right.zRotation = -zRotation;
-  }
-
-  setHorizontalPosition(horizontalPosition) {
-    this.left.horizontalPosition = horizontalPosition;
-    this.right.horizontalPosition = -horizontalPosition;
-  }
-}
-
-
 class Component {
   constructor() {
     this.forwardPosition = 0; //x plane
@@ -234,5 +145,60 @@ class RectComponent extends Component {
 
   drawShape() {
     rect(this.xCoordinate, this.yCoordinate, this.itemWidth, this.itemHeight);
+  }
+}
+
+class ComponentAmalgamation extends Component {
+  constructor() {
+    super();
+    this.components = [];
+    this.itemColor = null;
+  }
+
+  drawShape() {
+    for (const c in this.components) {
+      this.components[c].drawItem();
+    }
+  }
+  
+  setItemColor() {
+    if (this.itemColor != null) {
+      for (const c in this.components) {
+        this.components[c].itemColor = this.itemColor;
+      }
+    } else if (this.itemTexture != null) {
+      for (const c in this.components) {
+        this.components[c].itemTexture = this.itemTexture;
+      }
+    }
+  }
+}
+
+
+class YSymmetricCoupledComponents extends ComponentAmalgamation {
+  constructor() {
+    super();
+    this.left = 0;
+    this.right = 0;
+  }
+
+  setXRotation(xRotation) {
+    this.left.xRotation = xRotation;
+    this.right.xRotation = xRotation;
+  }
+
+  setYRotation(yRotation) {
+    this.left.yRotation = yRotation;
+    this.right.yRotation = -yRotation;
+  }
+
+  setZRotation(zRotation) {
+    this.left.zRotation = zRotation;
+    this.right.zRotation = -zRotation;
+  }
+
+  setHorizontalPosition(horizontalPosition) {
+    this.left.horizontalPosition = horizontalPosition;
+    this.right.horizontalPosition = -horizontalPosition;
   }
 }
