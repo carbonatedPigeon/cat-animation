@@ -15,47 +15,16 @@ function draw() {
   orbitControl(10, 10, 10);
 
   // set light position
-  pointLight(255, 255, 255, -1500, -1000, -700)
+  pointLight(255, 255, 255, 0, -500, 0);
 
   angleMode(DEGREES);
 
   noStroke();
-  push();
-  // setUpCat();
-  //rotateY(180);
-  // rotateZ(15);
-  // rotateX(10);
-  // let cat = new Cat();
-  // cat.drawItem();
-
-  // let chair = new Chair();
-  // chair.drawItem();
-
-  // let couch = new Couch();
-  // couch.drawItem();
-
-  // let cup = new Cup();
-  // cup.drawItem();
-
-  // let person = new Person();
-  // person.drawItem();
-
-  // let table = new Table();
-  // table.drawItem();
-
-  // let room = new Room();
-  // room.drawItem();
-
-  // let tv = new TV();
-  // tv.drawItem();
-
-  // let window = new Window();
-  // window.drawItem();
-
-  pop();
+  let item = new Couch();
+  item.drawItem();
 
   let animationConductor = new AnimationConductor();
-  animationConductor.setScene();
+  //animationConductor.setScene();
 }
 
 
@@ -66,7 +35,7 @@ class AnimationConductor{
     this.tables = {
       'dining_table': new Table(),
       'tv_stand': new Table(),
-      'night_stand': new Table(),
+      'end_table': new Table(),
     };
     this.chairs = [
       new Chair(),
@@ -79,29 +48,83 @@ class AnimationConductor{
     this.cup = new Cup();
     this.couch = new Couch();
     this.room = new Room();
+    this.rug = new Rug();
+    this.cups = {
+      'dining_table_cup_1': new Cup(),
+      'dining_table_cup_2': new Cup(),
+      'end_table_cup': new Cup(),
+    }
   }
 
   setScene() {
     //sets inital position of all objects in scene
     //setting up person values
-    this.person.forwardPosition = 175;
-    this.person.verticalPosition = -20;
-    this.person.horizontalPosition = 175;
+    this.person.setItemPosition(40, -20, 75);
     this.person.itemScale = createVector(0.5, 0.5, 0.5);
-    this.person.yRotation = -110;
+    this.person.yRotation = -30;
     this.person.drawItem();
     //setting up cat values
-    this.cat.verticalPosition = 155;
-    this.cat.itemScale = createVector(0.225, 0.225, 0.225);
-    this.cat.yRotation = 90;
+    this.cat.setItemPosition(-500, 125, 400);
+    this.cat.itemScale = createVector(0.3, 0.35, 0.3);
+    this.cat.yRotation = -90;
     this.cat.drawItem();
     //setting window values
-    this.window.verticalPosition = 90;
-    this.window.horizontalPosition = -700;
+    this.window.setItemPosition(0, 0, -700);
     this.window.itemScale = createVector(1.25, 1.5, 1);
+    this.window.yRotation = 90;
+    this.window.itemColor = color(60);
     this.window.drawItem();
     //setting up tv stand
-    this.tables['tv_stand'].forwardPosition = 450;
+    this.tables['tv_stand'].setItemPosition(450, 150, -450)
+    this.tables['tv_stand'].itemScale = createVector(1.5, 1, 4);
+    this.tables['tv_stand'].drawItem();
+    //setting up TV
+    this.tv.setItemPosition(450, -50, -450);
+    this.tv.itemScale = createVector(1, 1.5, 1.5);
+    this.tv.drawItem();
+    //setting up couch
+    this.couch.setItemPosition(-460, 150, -460);
+    this.couch.itemScale = createVector(2, 2, 2);
+    this.couch.yRotation = 180;
+    this.couch.drawItem();
+    //setting up end table next to couch
+    this.tables['end_table'].setItemPosition(-460, 115, -110);
+    this.tables['end_table'].itemScale = createVector(2, 1.5, 2);
+    this.tables['end_table'].drawItem();
+    //setting up rug
+    this.rug.setItemPosition(25, 250, -450)
+    this.rug.yRotation = -90;
+    this.rug.drawItem();
+    //setting up cup on end table
+    this.cups['end_table_cup'].setItemPosition(-420, 110, -175);
+    this.cups['end_table_cup'].drawItem();
+    //setting up dining table
+    this.tables['dining_table'].setItemPosition(0, 100, 350);
+    this.tables['dining_table'].itemScale = createVector(3, 1.6, 4)
+    this.tables['dining_table'].drawItem();
+    //setting up chairs
+    //start with chair person is sitting on & going clockwise
+    this.chairs[0].setItemPosition(45, 150, 80);
+    this.chairs[0].yRotation = -30;
+    this.chairs[0].drawItem();
+    this.chairs[1].setItemPosition(125, 150, 350);
+    this.chairs[1].drawItem();
+    this.chairs[2].setItemPosition(0, 150, 625);
+    this.chairs[2].yRotation = -90;
+    this.chairs[2].drawItem();
+    this.chairs[3].setItemPosition(-125, 150, 350);
+    this.chairs[3].yRotation = 180;
+    this.chairs[3].drawItem();
+    //setting up other cups
+    this.cups['dining_table_cup_1'].setItemPosition(175, 230, 200);
+    this.cups['dining_table_cup_1'].zRotation = 90;
+    this.cups['dining_table_cup_1'].yRotation = 15;
+    this.cups['dining_table_cup_1'].drawItem();
+    //drawing room
+    this.room.setItemPosition(-40, 250, -60)
+    this.room.itemScale = createVector(1.15, 1, 1.55);
+    this.room.drawItem();
+
   }
 }
 
