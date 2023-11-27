@@ -2,8 +2,11 @@ class Chair extends ComponentAmalgamation {
     constructor() {
         super();
         this.chairDimensions = new ChairDimensions();
+        this.seat = new Table();
+        this.seat.itemColor = color(0);
+        this.seat.itemTexture = null;
         this.components = [
-            new Table(),
+            this.seat,
             new ChairBack(this.chairDimensions),
             new ChairCusion(this.chairDimensions)
         ];
@@ -77,6 +80,7 @@ class ChairCusion extends BoxComponent {
     constructor(chairDimensions) {
         super();
         //default color is white
+        this.itemColor = color(255);
         this.itemTexture = chairCushionTexture;
         this.forwardPosition = (chairDimensions.chairWidth * 0.1 / 2) - chairDimensions.boxWidth;
         this.verticalPosition = -chairDimensions.boxWidth;
