@@ -100,7 +100,7 @@ class CouchBackCushion extends BoxComponent {
     this.itemDepth = couchDimensions.cushionHeight;//x plane
     this.itemHeight = 60; //y plane
     this.itemWidth = couchDimensions.cushionWidth; //z plane
-    this.zRotation = -15;
+    this.zRotation = 15;
     this.forwardPosition = 30; //x plane
     this.verticalPosition = -45; //y plane
     this.horizontalPosition = horizontalPosition; //z plane
