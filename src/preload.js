@@ -10,6 +10,7 @@ let tvScreenImage;
 let windowImage;
 let shirtTexture;
 let chairCushionTexture;
+let rugTexture;
 
 function preload() {
     couchTexture = loadImage('resource\\upholstryTexture.jpeg');
@@ -22,4 +23,5 @@ function preload() {
     tvScreenImage = loadImage('resource\\tvScreenImage.jpeg');
     windowImage = loadImage('resource\\outside.jpeg');
     shirtTexture = loadImage('resource\\shirtTexture.jpeg');
+    rugTexture = loadImage('resource\\rugTexture.jpeg');
 }
