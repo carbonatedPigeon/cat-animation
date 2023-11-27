@@ -1,7 +1,7 @@
 class Table extends ComponentAmalgamation {
   constructor() {
     super();
-    this.itemColor = color(0);
+    this.itemTexture = tableTexture;
     //creating table legs counter-clockwise
     this.tableLegs = [
       new TableLeg(createVector(-40, 50, 40)),
@@ -32,7 +32,6 @@ class TableLeg extends BoxComponent {
     this.forwardPosition = position.x;
     this.verticalPosition = position.y;
     this.horizontalPosition = position.z;
-    this.itemColor = color(0);
   }
 }
 
