@@ -7,6 +7,7 @@ class Component {
     this.xRotation = 0;
     this.yRotation = 0;
     this.zRotation = 0;
+    //defaults to black
     this.itemColor = color(0);
     this.itemTexture = null;
   }
@@ -48,6 +49,8 @@ class Component {
   }
 
   setItemColor() {
+    //if itemTexture is set to anything other than null
+    //it will prioritize tecture over over color
     if (this.itemTexture == null) {
       fill(this.itemColor);
     } else {
@@ -104,6 +107,15 @@ class EllipsoidComponent extends Component {
   drawShape() {
     ellipsoid(this.itemDepth, this.itemHeight, this.itemWidth);
   }
+
+  setItemDimensions(itemDepth, itemHeight, itemWidth) {
+    //setting itemDepth if arg provided
+    if (itemDepth != undefined) { this.itemDepth = itemDepth; }
+    //setting itemHeight if arg provided
+    if (itemHeight != undefined) { this.itemHeight = itemHeight; }
+    //setting itemWidth if arg provided
+    if (itemWidth != undefined) { this.itemWidth = itemWidth; }
+  }
 }
 
 
@@ -116,6 +128,13 @@ class CylinderComponent extends Component {
 
   drawShape() {
     cylinder(this.radius, this.itemHeight);
+  }
+
+  setItemDimensions(radius, itemHeight) {
+    //setting radius if arg provided
+    if (radius != undefined) { this.radius = radius; }
+    //setting itemHeight if arg provided
+    if (itemHeight != undefined) { this.itemHeight = itemHeight; }
   }
 }
 
@@ -130,6 +149,15 @@ class SquareComponent extends Component {
 
   drawShape() {
     square(this.xCoordinate, this.yCoordinate, this.sideLength);
+  }
+
+  setItemDimensions(xCoordinate, yCoordinate, sideLength) {
+    //setting xCoordinate if arg provided
+    if (xCoordinate != undefined) { this.xCoordinate = xCoordinate; }
+    //setting yCoordinate if arg provided
+    if (yCoordinate != undefined) { this.yCoordinate = yCoordinate; }
+    //setting sideLength if arg provided
+    if (sideLength != undefined) { this.sideLength = sideLength; }
   }
 }
 
