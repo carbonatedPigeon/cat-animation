@@ -40,6 +40,7 @@ class Cat extends ComponentAmalgamation {
       this.backRightLeg,
       this.tail,
     ];
+    this.yRotation = -90;
   }
 }
 
@@ -254,10 +255,10 @@ class CatEar extends Component {
 class CatTail extends Component {
   constructor() {
     super();
-    this.forwardPosition = 450;
-    this.verticalPosition = 100;
+    this.forwardPosition = 425;
+    this.verticalPosition = 150;
     this.itemScale = createVector(1, 1, 1.6);
-    this.zRotation = 210;
+    this.zRotation = -210;
     this.yRotation = 180;
   }
   
@@ -588,6 +589,24 @@ class CatJaw extends Component {
   }
 }
 
+class NewHead extends Component {
+  constructor() {
+    super();
+    this.itemColor = color(0, 0, 155);
+  }
+
+  drawShape() {
+    const LENGTH_OF_NECK = 250;
+    //back of neck
+    push();
+    translate(350, 50, 0);
+    rotateY(-90);
+    rect(0, 0, 100, LENGTH_OF_NECK);
+    pop();
+  }
+}
+
+
 class CatHeadShape extends Component {
   constructor(catHeadDimensions) {
     super();
@@ -653,10 +672,35 @@ class CatHeadShape extends Component {
     const HEIGHT_OF_NOSE = this.dimensions.heightOfNose;
     const TOP_WIDTH_OF_SNOUTH = this.dimensions.topWidthOfSnout;
     const HEIGHT_OF_SNOUT = this.dimensions.heightOfSnout;
+    const LENGTH_OF_NECK = 300;
     //section 1
     const v1 = [-20, HEIGHT_OF_SNOUT, BOTTOM_WIDTH_OF_SNOUT];
     const v2 = [-35, HEIGHT_OF_SNOUT + 80, BOTTOM_WIDTH_OF_SNOUT - 10];
     const v3 = [-35, HEIGHT_OF_NOSE + 30, 0];
+    const v20 = [50, HEIGHT_OF_NOSE - 10, 90];
+    const v21 = [50, HEIGHT_OF_NOSE , 100];
+    const v26 = [70, HEIGHT_OF_NOSE + 50, 125];
+    const v27 = [70, HEIGHT_OF_NOSE + 70, 125];
+    const v50 = [90, HEIGHT_OF_NOSE + 50, 125];
+    const v51 = [90, HEIGHT_OF_NOSE + 70, 125];
+    const v52 = [130, HEIGHT_OF_NOSE + 50, 170];
+    const v53 = [130, HEIGHT_OF_NOSE + 70, 170];
+    const v54 = [200, HEIGHT_OF_NOSE + 50, 180];
+    const v55 = [200, HEIGHT_OF_NOSE + 70, 180];
+    const v56 = [250, HEIGHT_OF_NOSE + 50, 170];
+    const v57 = [250, HEIGHT_OF_NOSE + 70, 170];
+    const v58 = [300, HEIGHT_OF_NOSE + 50, 140];
+    const v59 = [300, HEIGHT_OF_NOSE + 70, 140];
+    const v60 = [350, HEIGHT_OF_NOSE + 50, 50];
+    const v61 = [350, HEIGHT_OF_NOSE + 70, 50];
+    const v63 = [350, HEIGHT_OF_NOSE + 50, 0];
+    const v62 = [350, HEIGHT_OF_NOSE + 70, 0];
+    const v122 = [130, LENGTH_OF_NECK, 170];
+    const v123 = [200, LENGTH_OF_NECK, 180];
+    const v121 = [350, HEIGHT_OF_NOSE + 10, 0];
+    const v120 = [350, HEIGHT_OF_NOSE + 30, 0];
+    const v119 = [350, HEIGHT_OF_NOSE + 10, 35];
+
     //left corner, clockwise
     beginShape();
     vertex(-40, HEIGHT_OF_NOSE + 10, 0);
@@ -777,8 +821,22 @@ class CatHeadShape extends Component {
     vertex(v9[0], v9[1], v9[2]);
     endShape(CLOSE);
 
-    const v20 = [50, HEIGHT_OF_NOSE - 10, 90];
-    //top left clockwise;
+    //neck
+    // push();
+    // translate(200, 180, 0);
+    // cylinder(150, 200);
+    // pop();
+
+    
+    // // neck
+    
+    // push();
+    // translate(175, 80, 0);
+    // sphere(150);
+    // pop();
+
+    
+    // //top left clockwise;
     beginShape();
     vertex(v9[0], v9[1], v9[2]);
     vertex(v19[0], v19[1], v19[2]);
@@ -786,7 +844,7 @@ class CatHeadShape extends Component {
     vertex(v10[0], v10[1], v10[2]);
     endShape(CLOSE);
 
-    const v21 = [50, HEIGHT_OF_NOSE , 100];
+    
     //top left clockwise;
     beginShape();
     vertex(v10[0], v10[1], v10[2]);
@@ -796,8 +854,7 @@ class CatHeadShape extends Component {
     endShape(CLOSE);
 
     //section 7
-    const v26 = [70, HEIGHT_OF_NOSE + 50, 125];
-    const v27 = [70, HEIGHT_OF_NOSE + 70, 125];
+    
     //red
 
     //leftmost corner
@@ -815,8 +872,7 @@ class CatHeadShape extends Component {
     vertex(v27[0], v27[1], v27[2]);
     endShape(CLOSE);
 
-    const v50 = [90, HEIGHT_OF_NOSE + 50, 125];
-    const v51 = [90, HEIGHT_OF_NOSE + 70, 125];
+    
     //top left corner counter clock
     beginShape();
     vertex(v26[0], v26[1], v26[2]);
@@ -825,8 +881,7 @@ class CatHeadShape extends Component {
     vertex(v50[0], v50[1], v50[2]);
     endShape(CLOSE);
 
-    const v52 = [130, HEIGHT_OF_NOSE + 50, 170];
-    const v53 = [130, HEIGHT_OF_NOSE + 70, 170];
+    
     //top left counter clock
     beginShape();
     vertex(v50[0], v50[1], v50[2]);
@@ -835,8 +890,7 @@ class CatHeadShape extends Component {
     vertex(v52[0], v52[1], v52[2]);
     endShape(CLOSE);
 
-    const v54 = [200, HEIGHT_OF_NOSE + 50, 180];
-    const v55 = [200, HEIGHT_OF_NOSE + 70, 180];
+    
     //top left counter clock
     beginShape();
     vertex(v52[0], v52[1], v52[2]);
@@ -845,8 +899,7 @@ class CatHeadShape extends Component {
     vertex(v54[0], v54[1], v54[2]);
     endShape(CLOSE);
 
-    const v56 = [250, HEIGHT_OF_NOSE + 50, 170];
-    const v57 = [250, HEIGHT_OF_NOSE + 70, 170];
+    
     //top left counter clock
     beginShape();
     vertex(v54[0], v54[1], v54[2]);
@@ -854,9 +907,7 @@ class CatHeadShape extends Component {
     vertex(v57[0], v57[1], v57[2]);
     vertex(v56[0], v56[1], v56[2]);
     endShape();
-
-    const v58 = [300, HEIGHT_OF_NOSE + 50, 140];
-    const v59 = [300, HEIGHT_OF_NOSE + 70, 140];
+    
     //top left counter clock
     beginShape();
     vertex(v56[0], v56[1], v56[2]);
@@ -865,8 +916,7 @@ class CatHeadShape extends Component {
     vertex(v58[0], v58[1], v58[2]);
     endShape(CLOSE);
 
-    const v60 = [350, HEIGHT_OF_NOSE + 50, 50];
-    const v61 = [350, HEIGHT_OF_NOSE + 70, 50];
+    
     //top left counter clock
     beginShape();
     vertex(v58[0], v58[1], v58[2]);
@@ -875,8 +925,7 @@ class CatHeadShape extends Component {
     vertex(v60[0], v60[1], v60[2]);
     endShape(CLOSE);
 
-    const v63 = [350, HEIGHT_OF_NOSE + 50, 0];
-    const v62 = [350, HEIGHT_OF_NOSE + 70, 0];
+
     //top left counter clock
     beginShape();
     vertex(v60[0], v60[1], v60[2]);
@@ -1420,7 +1469,7 @@ class CatHeadShape extends Component {
     endShape(CLOSE);
 
 
-    const v119 = [350, HEIGHT_OF_NOSE + 10, 35];
+    
     beginShape();
     vertex(v109[0], v109[1], v109[2]);
     vertex(v118[0], v118[1], v118[2]);
@@ -1441,7 +1490,7 @@ class CatHeadShape extends Component {
     endShape(CLOSE);
 
     //section 11.8
-    const v120 = [350, HEIGHT_OF_NOSE + 30, 0];
+    
     beginShape();
     vertex(v60[0], v60[1], v60[2]);
     vertex(v63[0], v63[1], v63[2]);
@@ -1449,7 +1498,7 @@ class CatHeadShape extends Component {
     vertex(v118[0], v118[1], v118[2]);
     endShape(CLOSE);
 
-    const v121 = [350, HEIGHT_OF_NOSE + 10, 0];
+    
     beginShape();
     vertex(v118[0], v118[1], v118[2]);
     vertex(v120[0], v120[1], v120[2]);
@@ -1467,10 +1516,9 @@ class CatHeadShape extends Component {
     //section 12
     //purple
 
-    const LENGTH_OF_NECK = 300;
+    
 
-    const v122 = [130, LENGTH_OF_NECK, 170];
-    const v123 = [200, LENGTH_OF_NECK, 180];
+
 
     beginShape();
     vertex(v51[0], v51[1], v51[2]);
